@@ -15,7 +15,9 @@ if uploaded_file:
 
     with st.spinner("Extrayendo texto con EasyOCR..."):
         reader = easyocr.Reader(['es'], gpu=False)
-        result = reader.readtext(image)
+      import numpy as np  # <-- pon esto arriba con tus imports
+image_np = np.array(image)
+result = reader.readtext(image_np)  
 
     texto_extraido = "\n".join([item[1] for item in result])
     st.text_area("Texto detectado:", texto_extraido, height=250)
