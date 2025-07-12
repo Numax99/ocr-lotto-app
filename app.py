@@ -15,7 +15,7 @@ if uploaded_file:
 
     with st.spinner("Extrayendo texto con EasyOCR..."):
         reader = easyocr.Reader(['es'], gpu=False)
-      import numpy as np  # <-- pon esto arriba con tus imports
+      import numpy as np  
 image_np = np.array(image)
 result = reader.readtext(image_np)  
 
