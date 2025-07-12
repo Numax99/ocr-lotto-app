@@ -16,6 +16,15 @@ if uploaded_file:
     with st.spinner("Extrayendo texto con EasyOCR..."):
         reader = easyocr.Reader(['es'], gpu=False)
       import numpy as np  
+if uploaded_file:
+    image = Image.open(uploaded_file)
+    st.image(image, caption="Imagen subida", use_column_width=True)
+
+    with st.spinner("Extrayendo texto con EasyOCR..."):
+        reader = easyocr.Reader(['es'], gpu=False)
+        image_np = np.array(image)  
+        result = reader.readtext(image_np)
+        
 image_np = np.array(image)
 result = reader.readtext(image_np)  
 
@@ -23,7 +32,6 @@ result = reader.readtext(image_np)
     st.text_area("Texto detectado:", texto_extraido, height=250)
 
     if st.button("Guardar como CSV y SQL"):
-        # Simulación con datos de ejemplo (puedes parsear texto_extraido luego)
         data = [
             {"fecha": "2020-12-28", "hora": "09:00", "numero": 13, "animal": "MONO"},
             {"fecha": "2020-12-28", "hora": "10:00", "numero": 11, "animal": "GATO"}
